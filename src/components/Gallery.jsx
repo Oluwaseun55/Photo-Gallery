@@ -15,15 +15,15 @@ const Gallery = ({ isAdmin }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [imagesPerPage, setImagesPerPage] = useState(getImagesPerPage());
 
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await fetch(
-        "http://localhost/Reactphoto/backend/api/get_images.php",
-        { credentials: "include" }
-      );
+      const res = await fetch(`${BACKEND_URL}/api/get_images.php`, {
+        credentials: "include",
+      });
       const data = await res.json();
-      // console.log("Fetched images:", data); // Debug log
       setImages(data);
       setError(null);
     } catch (err) {
@@ -34,12 +34,10 @@ const Gallery = ({ isAdmin }) => {
     }
   };
 
-  // ✅ Fetch once on load
   useEffect(() => {
     fetchImages();
   }, []);
 
-  // ✅ Responsive resize logic
   useEffect(() => {
     const handleResize = () => {
       setImagesPerPage(getImagesPerPage());
@@ -49,12 +47,10 @@ const Gallery = ({ isAdmin }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ✅ Must declare this early so useEffect below can access it safely
   const visibleImages = isAdmin
     ? images
     : images.filter((img) => img.published === 1);
 
-  // ✅ Reset pagination if out of range
   useEffect(() => {
     if (currentPage > Math.ceil(visibleImages.length / imagesPerPage)) {
       setCurrentPage(1);
@@ -65,15 +61,12 @@ const Gallery = ({ isAdmin }) => {
     if (!window.confirm("Delete this image?")) return;
 
     try {
-      const res = await fetch(
-        "http://localhost/Reactphoto/backend/api/delete_image.php",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ id }),
-        }
-      );
+      const res = await fetch(`${BACKEND_URL}/api/delete_image.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ id }),
+      });
       const data = await res.json();
       if (data.success) {
         alert("✅ Image deleted.");
@@ -89,15 +82,12 @@ const Gallery = ({ isAdmin }) => {
 
   const togglePublish = async (id, currentStatus) => {
     try {
-      const res = await fetch(
-        "http://localhost/Reactphoto/backend/api/toggle_publish.php",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ id, publish: currentStatus ? 0 : 1 }),
-        }
-      );
+      const res = await fetch(`${BACKEND_URL}/api/toggle_publish.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ id, publish: currentStatus ? 0 : 1 }),
+      });
       const data = await res.json();
       if (data.success) {
         fetchImages();
@@ -110,7 +100,6 @@ const Gallery = ({ isAdmin }) => {
     }
   };
 
-  // ✅ Pagination
   const indexOfLast = currentPage * imagesPerPage;
   const indexOfFirst = indexOfLast - imagesPerPage;
   const currentImages = visibleImages.slice(indexOfFirst, indexOfLast);
@@ -136,7 +125,7 @@ const Gallery = ({ isAdmin }) => {
         {currentImages.map((img) => (
           <div key={img.id} className="gallery-item">
             <img
-              src={`http://localhost/Reactphoto/backend/uploads/${img.filename}`}
+              src={`${BACKEND_URL}/uploads/${img.filename}`}
               alt={img.filename}
               onError={(e) => (e.target.src = "/placeholder.png")}
             />
@@ -146,7 +135,7 @@ const Gallery = ({ isAdmin }) => {
 
             <div className="button-row">
               <a
-                href={`http://localhost/Reactphoto/backend/api/download.php?file=${img.filename}`}
+                href={`${BACKEND_URL}/api/download.php?file=${img.filename}`}
                 download
                 className="btn-download"
                 target="_blank"
