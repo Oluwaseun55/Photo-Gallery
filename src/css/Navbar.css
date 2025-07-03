@@ -1,0 +1,133 @@
+:root {
+  --primary-color: #e60000;
+  --secondary-color: #000000;
+  --background-color: #ffffff;
+  --text-color: #ffffff;
+  --hover-bg: #b30000;
+  --transition: 0.3s ease-in-out;
+}
+
+/* Base Navbar Styles */
+.navbar {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Brand Name */
+.navbar-brand,
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-right: auto;
+}
+
+.navbar-toggle {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  line-height: 1;
+  height: auto;
+  width: auto;
+  display: none;
+}
+
+
+/* Nav Links */
+.navbar-links,
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: max-height var(--transition);
+}
+
+.navbar-links a,
+.navbar-links .logout-btn,
+.nav-links a,
+.nav-links .logout-btn {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.logout-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.navbar-links a:hover,
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .navbar-toggle,
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.25rem;
+  }
+
+  .navbar-links,
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    background-color: var(--secondary-color);
+    margin-top: 3.5rem;
+    border-top: 1px solid #333;
+    padding-bottom: 1rem;
+  }
+
+  .navbar-links.active,
+  .nav-links.active {
+    display: flex;
+  }
+
+  .navbar-links a,
+  .nav-links a,
+  .logout-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 0;
+    color: white !important;
+    text-decoration: none;
+  }
+
+  @media (max-width: 480px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links a,
+  .logout-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 0;
+  }
+}
+
+}

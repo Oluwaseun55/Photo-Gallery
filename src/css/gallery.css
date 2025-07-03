@@ -1,0 +1,53 @@
+.gallery-grid .gallery-item .download-btn {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-right: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.gallery-grid .gallery-item .download-btn:hover {
+  background: #000;
+}
+
+.gallery-grid .gallery-item .delete-btn {
+  background: red;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gallery-grid .gallery-item .delete-btn:hover {
+  background: darkred;
+}
+.gallery-grid .gallery-item .delete-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.gallery-grid .gallery-item .delete-btn:disabled:hover {
+  background: #ccc;
+}
+.pagination {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.pagination button {
+  margin: 0 0.5rem;
+  padding: 0.4rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

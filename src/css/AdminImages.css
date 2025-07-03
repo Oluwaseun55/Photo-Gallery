@@ -1,0 +1,72 @@
+.admin-container {
+  padding: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.gallery-item {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.status.published {
+  color: green;
+}
+
+.status.unpublished {
+  color: orange;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.publish-btn,
+.delete-btn {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.publish-btn.publish {
+  background-color: #0066cc;
+}
+
+.publish-btn.unpublish {
+  background-color: #555;
+}
+
+.delete-btn {
+  background-color: red;
+}
+.delete-btn:hover {
+  background-color: darkred;
+}
